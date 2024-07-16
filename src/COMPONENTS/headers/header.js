@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View ,Image,TouchableOpacity} from 'react-native'
+import { StyleSheet, Text,Image,TouchableOpacity,View,} from 'react-native'
 import React from 'react'
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
   } from 'react-native-responsive-screen';
   import {useNavigation} from '@react-navigation/native';
+  import Animated, {FadeInDown, FadeInUp } from 'react-native-reanimated';
  
 
 const Header = ({category}) => {
@@ -12,11 +13,15 @@ const Header = ({category}) => {
   
     const opendrower = () => {
         navigation.openDrawer();
+   
       };
 
     
   return (
-    <View style={styles.mainTextView}>
+    <Animated.View entering={FadeInUp.duration(500).springify()} style={styles.mainTextView}>
+      
+
+
     <Image
       style={styles.mainlogo}
       source={require('C:/Users/admin/OneDrive/Desktop/reactnative_todo/newtodo/src/img/Affinity-Luxury-Logo.jpg')}
@@ -44,7 +49,8 @@ const Header = ({category}) => {
      {category}
       </Text>
     </View>
-  </View>
+   
+  </Animated.View>
   )
 }
 

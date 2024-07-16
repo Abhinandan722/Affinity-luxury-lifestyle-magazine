@@ -1,24 +1,37 @@
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {useNavigation} from '@react-navigation/native';
 import Imgcomp from '../imgcomp';
-
+import Animated, {FadeInDown,sharedTransitionTag } from 'react-native-reanimated';
 const Card = ({item, navigationn, iDnum}) => {
   const navigation = useNavigation();
+ 
+  useEffect(()=>{
+
+  },[])
 
   return (
     <>
-     {
-      item.featured_image_url?<TouchableOpacity 
-      onPress={navigationn}
-      >
-        <Imgcomp url={item.featured_image_url}  />
-      </TouchableOpacity>:null
-     }
+  
+     <TouchableOpacity
+       onPress={navigationn}
+     >
+     <Animated.Image
+    
+      style={{
+        width: wp(90),
+        height:hp(30),
+        alignSelf:'center'
+      }}
+      source={{uri:item.featured_image_url}}
+      sharedTransitionTag={item.title}  
+    />
+     </TouchableOpacity>
+      
       
    
       <View

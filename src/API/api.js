@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useEffect } from 'react';
 
 const API_BASE_URL = 'https://affinitymag.co.uk/wp-json'; // Replace with your API base URL
 
@@ -38,3 +39,19 @@ export const getrandom = async (endpoint) => {
       throw error;
     }
   }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

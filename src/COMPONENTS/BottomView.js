@@ -19,6 +19,7 @@ const BottomView = ({scrollToTop}) => {
           tintColor={'white'}
           borderColor={'white'}
           backgroundColor={'transparent'}
+          url={'https://www.facebook.com/AffinityMag'}
         />
         <CustomBTN
           height={3}
@@ -27,6 +28,7 @@ const BottomView = ({scrollToTop}) => {
           tintColor={'white'}
           borderColor={'white'}
           backgroundColor={'transparent'}
+          url={'https://x.com/i/flow/login?redirect_after_login=%2Faffinitymagz'}
         />
         <CustomBTN
           height={3}
@@ -35,6 +37,7 @@ const BottomView = ({scrollToTop}) => {
           tintColor={'white'}
           borderColor={'white'}
           backgroundColor={'transparent'}
+          url={'https://www.instagram.com/affinitymagz/'}
         />
       </View>
       <View style={{backgroundColor: '#242424'}} className="py-8">

@@ -16,12 +16,14 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {getrandom} from '../API/api';
 
-const Randompost = () => {
+const Randompost = (item) => {
+  
   const [allrandom, setAllrandom] = useState([]);
   const [isloader,setIsloader]=useState(false);
   useEffect(() => {
+    console.log("id ka data",item.item.id)
     fetchdata();
-  }, []);
+  }, [item.item.id]);
 
   const fetchdata = async () => {
     
@@ -68,7 +70,7 @@ const Randompost = () => {
             <View className="mt-6">
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate('randompost_detail', {item})
+                  navigation.navigate('detialpage', {item})
                 }>
                 <Image
                   className="h-56"

@@ -9,7 +9,7 @@ import {
 import CustomBTN from './customBTN';
 import {useNavigation} from '@react-navigation/native';
 import {getrecentpost} from '../API/api';
-
+import Affinity_img from './affinity_main_img/affinity_img';
 
 const ConnectWithUs = () => {
   const navigation = useNavigation();
@@ -22,8 +22,9 @@ const ConnectWithUs = () => {
   const fetchdata = async () => {
     setIsloader(true);
     try {
-      const result = await getrecentpost('/wp/v2/posts');
+      const result = await getrecentpost('/custom/v1/content');
       setAllrecentdata(result);
+     
       setIsloader(false);
     } catch (error) {
       console.log('error in recent data', error);
@@ -35,6 +36,11 @@ const ConnectWithUs = () => {
 
   return (
     <View className="">
+
+      <Affinity_img />
+
+
+      
       <Text
         className="self-center text-2xl text-black"
         style={{fontFamily: 'PlayfairDisplay-Regular', letterSpacing: 2}}>
@@ -50,6 +56,7 @@ const ConnectWithUs = () => {
           tintColor={'white'}
           borderColor={'rgb(30,114,189)'}
           backgroundColor={'rgb(30,114,189)'}
+          url={'https://www.facebook.com/AffinityMag'}
         />
         <CustomBTN
           height={3}
@@ -58,6 +65,7 @@ const ConnectWithUs = () => {
           tintColor={'white'}
           borderColor={'rgb(30,114,189)'}
           backgroundColor={'rgb(30,114,189)'}
+          url={'https://x.com/i/flow/login?redirect_after_login=%2Faffinitymagz'}
         />
         <CustomBTN
           height={3}
@@ -66,6 +74,7 @@ const ConnectWithUs = () => {
           tintColor={'white'}
           borderColor={'rgb(30,114,189)'}
           backgroundColor={'rgb(30,114,189)'}
+          url={'https://www.instagram.com/affinitymagz/'}
         />
       </View>
 
@@ -87,18 +96,23 @@ const ConnectWithUs = () => {
     {
       isloader?<ActivityIndicator 
       className="h-40" size="large"  
-      color="rgb(199, 167, 112)"/> : <FlatList 
+      color="rgb(199, 167, 112)"/> :
+       <FlatList 
         scrollEnabled={false}
 
         data={allrecentdata}
+        keyExtractor={(item, index) => index.toString()}  
         renderItem={({item,index})=>{
+          // console.log("this is recent data",item.title)
 
           return(
             <View>
 
-       <TouchableOpacity>
+       <TouchableOpacity onPress={()=> navigation.navigate('detialpage',{item })
+      }
+        >
           <Text className=" text-xl" style={[styles.recentposttext,{width:wp(85)}]}>
-         {item.title.rendered}
+         {item.title}
           </Text>
         </TouchableOpacity>
         <Divider style={{width: wp(85), height: 1}} />
