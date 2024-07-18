@@ -14,10 +14,10 @@ const Fooddrink = ({Travels, setTravels}) => {
     {label: 'FOOD AND DRINK', value: 'FOOD AND DRINK'},
     {label: 'LATEST NEWS', value: 'LATEST NEWS'},
     {label: 'RECIPES AND TIPS', value: 'RECIPES AND TIPS'},
-    {
-      label: 'NO-BAKE STRAWBERRY CHEESECAKE',
-      value: 'NO-BAKE STRAWBERRY CHEESECAKE',
-    },
+    // {
+    //   label: 'NO-BAKE STRAWBERRY CHEESECAKE',
+    //   value: 'NO-BAKE STRAWBERRY CHEESECAKE',
+    // },
     {label: 'RESTAURANT REVIEWS', value: 'RESTAURANT REVIEWS'},
     {label: 'COCKTAILS', value: 'COCKTAILS'},
     {label: 'WINE AND SPIRITS', value: 'WINE AND SPIRITS'},
@@ -28,21 +28,22 @@ const Fooddrink = ({Travels, setTravels}) => {
       <DropDownPicker
         onSelectItem={item => {
           console.log('....onselected', item.value);
-          if (item.value == 'FOOD AND DRINK') {
-            navigation.navigate('FoodANDdrink');
-          } else if (item.value == 'LATEST NEWS') {
-            navigation.navigate('LatestNewsofdrink_food');
-          } else if (item.value == 'RECIPES AND TIPS') {
-            navigation.navigate('RacipesANDTips');
-          } else if (item.value == 'NO-BAKE STRAWBERRY CHEESECAKE') {
-            navigation.navigate('No_Bake_cheesecake');
-          } else if (item.value == 'RESTAURANT REVIEWS') {
-            navigation.navigate('Restaurant_reviews');
-          } else if (item.value == 'COCKTAILS') {
-            navigation.navigate('Cocktails');
-          } else if (item.value == 'WINE AND SPIRITS') {
-            navigation.navigate('wineANDspirit');
-          }
+          navigation.navigate('home',{categories:item.value})
+          // if (item.value == 'FOOD AND DRINK') {
+          //   navigation.navigate('FoodANDdrink');
+          // } else if (item.value == 'LATEST NEWS') {
+          //   navigation.navigate('LatestNewsofdrink_food');
+          // } else if (item.value == 'RECIPES AND TIPS') {
+          //   navigation.navigate('RacipesANDTips');
+          // } else if (item.value == 'NO-BAKE STRAWBERRY CHEESECAKE') {
+          //   navigation.navigate('No_Bake_cheesecake');
+          // } else if (item.value == 'RESTAURANT REVIEWS') {
+          //   navigation.navigate('Restaurant_reviews');
+          // } else if (item.value == 'COCKTAILS') {
+          //   navigation.navigate('Cocktails');
+          // } else if (item.value == 'WINE AND SPIRITS') {
+          //   navigation.navigate('wineANDspirit');
+          // }
         }}
         listItemContainerStyle={{
           height: 'auto',

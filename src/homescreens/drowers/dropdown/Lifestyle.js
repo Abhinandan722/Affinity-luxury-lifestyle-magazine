@@ -12,18 +12,18 @@ const Lifestyle = ({Travels, setTravels}) => {
   const [dropdownItems, setDropdownItems] = useState([
     {label: 'LIFESTYLE', value: 'LIFESTYLE'},
     {label: 'HEALTH AND WELLBEING', value: 'HEALTH AND WELLBEING'},
-    {label: 'LEARNING NOT TO SETTLE', value: 'LEARNING NOT TO SETTLE'},
+    //{label: 'LEARNING NOT TO SETTLE', value: 'LEARNING NOT TO SETTLE'},
     {label: 'INTERIORS', value: 'INTERIORS'},
     {label: 'MEN AND MOTORS', value: 'MEN AND MOTORS'},
     {label: 'ENTERTAINMENT', value: 'ENTERTAINMENT'},
-    {
-      label: "'JERSEY BOYS ARE BEGGIN’ TO ENTERTAIN US'",
-      value: "'JERSEY BOYS ARE BEGGIN’ TO ENTERTAIN US'",
-    },
-    {
-      label: "'TOM JONES COMES TO AUDLEY END HOUSE & GARDENS'",
-      value: "'TOM JONES COMES TO AUDLEY END HOUSE & GARDENS'",
-    },
+    // {
+    //   label: "'JERSEY BOYS ARE BEGGIN’ TO ENTERTAIN US'",
+    //   value: "'JERSEY BOYS ARE BEGGIN’ TO ENTERTAIN US'",
+    // },
+    // {
+    //   label: "'TOM JONES COMES TO AUDLEY END HOUSE & GARDENS'",
+    //   value: "'TOM JONES COMES TO AUDLEY END HOUSE & GARDENS'",
+    // },
     {label: 'LATEST NEWS', value: 'LATEST NEWS'},
     {label: 'CHRISTMAS', value: 'CHRISTMAS'},
   ]);
@@ -35,31 +35,32 @@ const Lifestyle = ({Travels, setTravels}) => {
         hideSelectedItemIcon={true}
         onSelectItem={item => {
           console.log('....onselected', item.value);
-          if (item.value == 'LIFESTYLE') {
-            navigation.navigate('Lifestyle');
-          } else if (item.value == 'HEALTH AND WELLBEING') {
-            navigation.navigate('Healthandwellbeing');
-          } else if (item.value == 'LEARNING NOT TO SETTLE') {
-            navigation.navigate('LearningNotToSettle');
-          } else if (item.value == 'INTERIORS') {
-            navigation.navigate('Interiors');
-          } else if (item.value == 'MEN AND MOTORS') {
-            navigation.navigate('MenandMotors');
-          } else if (item.value == 'ENTERTAINMENT') {
-            navigation.navigate('Entertainment');
-          } else if (
-            item.value == "'JERSEY BOYS ARE BEGGIN’ TO ENTERTAIN US'"
-          ) {
-            navigation.navigate('JerseyBoysAreBeggin');
-          } else if (
-            item.value == "'TOM JONES COMES TO AUDLEY END HOUSE & GARDENS'"
-          ) {
-            navigation.navigate('TomJones_comes_gardens');
-          } else if (item.value == 'LATEST NEWS') {
-            navigation.navigate('LatestNews');
-          } else if (item.value == 'CHRISTMAS') {
-            navigation.navigate('Cristmas');
-          }
+          navigation.navigate('home',{categories:item.value})
+          // if (item.value == 'LIFESTYLE') {
+          //   navigation.navigate('Lifestyle');
+          // } else if (item.value == 'HEALTH AND WELLBEING') {
+          //   navigation.navigate('Healthandwellbeing');
+          // } else if (item.value == 'LEARNING NOT TO SETTLE') {
+          //   navigation.navigate('LearningNotToSettle');
+          // } else if (item.value == 'INTERIORS') {
+          //   navigation.navigate('Interiors');
+          // } else if (item.value == 'MEN AND MOTORS') {
+          //   navigation.navigate('MenandMotors');
+          // } else if (item.value == 'ENTERTAINMENT') {
+          //   navigation.navigate('Entertainment');
+          // } else if (
+          //   item.value == "'JERSEY BOYS ARE BEGGIN’ TO ENTERTAIN US'"
+          // ) {
+          //   navigation.navigate('JerseyBoysAreBeggin');
+          // } else if (
+          //   item.value == "'TOM JONES COMES TO AUDLEY END HOUSE & GARDENS'"
+          // ) {
+          //   navigation.navigate('TomJones_comes_gardens');
+          // } else if (item.value == 'LATEST NEWS') {
+          //   navigation.navigate('LatestNews');
+          // } else if (item.value == 'CHRISTMAS') {
+          //   navigation.navigate('Cristmas');
+          // }
         }}
         listItemContainerStyle={{
           height: 'auto',

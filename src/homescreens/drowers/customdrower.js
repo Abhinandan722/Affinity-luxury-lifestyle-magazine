@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Pressable} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import FashionandBeauty from './dropdown/fashion&beauty';
 import Travel from './dropdown/Travel';
@@ -18,15 +18,22 @@ const CustomDrawer = () => {
   const [inspiration, setInspiration] = useState('INSPIRATION');
   const [contact, setContact] = useState('CONTACT');
 
+  const [competition, setCompetition] = useState('- Competitions');
+  const [home, setHome] = useState('Home');
+
   return (
     
     <View style={styles.container} className="pt-3">
+    
+
       <Text
-        onPress={() => navigation.navigate('home')}
+        onPress={() => navigation.navigate('home',{categories:home})}
         style={styles.text}
         className="text-xl ">
         HOME
       </Text>
+    
+    
       <FashionandBeauty
         FashionBeauty={FashionBeauty}
         setFashionBeauty={setFashionBeauty}
@@ -36,7 +43,7 @@ const CustomDrawer = () => {
       <Lifestyle Travels={lifestyle} setTravels={setLifestyle} />
       <Fooddrink Travels={fooddrink} setTravels={setFooddrink} />
       <Text style={styles.text} className="text-xl my-3 " 
-       onPress={()=>navigation.navigate('compatitions')}
+       onPress={()=>navigation.navigate('home',{categories:competition})}
        >
         COMPATITIONS
       </Text>

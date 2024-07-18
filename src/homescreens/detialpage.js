@@ -31,6 +31,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import Mybuttons from '../COMPONENTS/buttons';
 import RenderHTML from 'react-native-render-html';
+import Header from '../COMPONENTS/headers/header';
 
 const Detialpage = ({route}) => {
   const {item} = route.params;
@@ -43,12 +44,12 @@ const Detialpage = ({route}) => {
 
   useEffect(() => {
     scrollToTop();
-  },);
+  });
   const {width} = useWindowDimensions();
   const fadeInDownRef = useRef(null);
   // const htmlContent = `${item.content}`;
   const source = {
-    html: item.content, 
+    html: item.content,
   };
 
   const scrollToTop = () => {
@@ -60,39 +61,60 @@ const Detialpage = ({route}) => {
   };
 
   const tagsStyles = {
-    span: {
-      color: 'black',
+    div:{
+  
+        color: 'black',
+  
+        fontSize: 21,
+        lineHeight: hp(3.6),
+        letterSpacing: 1,
+        marginVertical: hp(2.5),
+  
+        fontFamily: 'OpenSans_Condensed-SemiBoldltalic',
+        fontFamily: 'OpenSans-Regular',
+  
       
+    },
+    p:{
+      color: 'black',
+
       fontSize: 21,
       lineHeight: hp(3.6),
       letterSpacing: 1,
       marginVertical: hp(2.5),
 
       fontFamily: 'OpenSans_Condensed-SemiBoldltalic',
-                  fontFamily: 'OpenSans-Regular',
+      fontFamily: 'OpenSans-Regular',
+
+    },
+    span: {
+      color: 'black',
+
+      fontSize: 21,
+      lineHeight: hp(3.6),
+      letterSpacing: 1,
+      marginVertical: hp(2.5),
+
+      fontFamily: 'OpenSans_Condensed-SemiBoldltalic',
+      fontFamily: 'OpenSans-Regular',
     },
     b: {
       fontSize: 18,
       color: 'rgb(199, 167, 112)',
     },
 
-  
-    a:{
-    
-
-        fontSize: 21,
+    a: {
+      fontSize: 21,
       lineHeight: hp(3.6),
       fontFamily: 'OpenSans_Condensed-SemiBoldltalic',
       fontFamily: 'OpenSans-Regular',
-
-    
-     
     },
     img: {
       width: wp(90),
       height: 'auto',
       marginVertical: hp(1),
     },
+  
   };
   return (
     <ScrollView ref={scrollViewRef} contentContainerStyle={{flexGrow: 1}}>
@@ -100,12 +122,8 @@ const Detialpage = ({route}) => {
         style={{flex: 1, backgroundColor: 'white'}}
         ref={fadeInDownRef}>
         <View style={{paddingHorizontal: wp(5), backgroundColor: 'white'}}>
-          <View style={styles.mainTextView}>
-            <Image
-              style={styles.mainlogo}
-              source={require('../img/Affinity-Luxury-Logo.jpg')}
-            />
-          </View>
+         
+           <Header category={item?item.categories:' '} />
           <View style={{marginTop: hp(2)}}>
             <View>
               <Animated.View
@@ -118,9 +136,12 @@ const Detialpage = ({route}) => {
                     style={{
                       width: wp(90),
                       height: hp(30),
+                      objectFit: "contain"
                     }}
-                    source={{uri: item.featured_image_url}}
-                    sharedTransitionTag={item.title}
+                    source={{uri: item.featured_image_url
+                      ? item.featured_image_url
+                      : ' https://affinitymag.co.uk/wp-content/uploads/2020/03/MAIN-IMAGE-3.jpg',}}
+                  
                   />
                 </TouchableOpacity>
 
@@ -189,6 +210,7 @@ const Detialpage = ({route}) => {
                       fontSize: 22,
                       color: 'rgb(199, 167, 112)',
                     }}>
+                    
                     {item.author}
                   </Text>
                   /{item.date}
@@ -202,11 +224,11 @@ const Detialpage = ({route}) => {
                   .springify()
                   .damping(20)}>
                 {/* <HTMLView value={htmlContent} stylesheet={htmlContentStyles} /> */}
-<RenderHTML 
-    source={source}
-    contentWidth={width}
-    tagsStyles={tagsStyles}
- />
+                <RenderHTML
+                  source={source}
+                  contentWidth={width}
+                  tagsStyles={tagsStyles}
+                />
 
                 {/* <View className="mb-14">
                   <View
@@ -240,10 +262,10 @@ const Detialpage = ({route}) => {
                     image={require('../img/tumblr.png')}
                   />
                 </View> */}
-                <Mybuttons/>
+                <Mybuttons />
               </Animated.View>
-
-              <TouchableOpacity
+               {/* this is a star button */}
+              {/* <TouchableOpacity
                 onPress={() => {
                   if (toggle == 0) {
                     setToggle('1');
@@ -284,19 +306,16 @@ const Detialpage = ({route}) => {
                     source={require('../img/star(1).png')}
                   />
                 )}
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               {/* this is a prev and next view  */}
 
               <Prev_Newer item={item} />
 
               {/* random  post view */}
 
-              <Randompost  item={item} />
+              <Randompost item={item} />
             </View>
           </View>
-
-        
-          
 
           <ConnectWithUs />
         </View>
@@ -329,4 +348,3 @@ const styles = StyleSheet.create({
   },
   randomView: {},
 });
-

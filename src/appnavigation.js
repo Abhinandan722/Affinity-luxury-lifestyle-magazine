@@ -18,7 +18,7 @@ const Appnavigation = () => {
   return (
     <View style={{flex: 1}}>
       <NavigationContainer>
-        <stack.Navigator screenOptions={{headerShown: false}}>
+        <stack.Navigator screenOptions={{headerShown: false,animationTypeForReplace:"pop"}} >
           <stack.Screen component={Drowernavigation} name="drowerroot" />
           <stack.Screen component={Competitions} name="competitions" />
           <stack.Screen component={Detialpage} name="detialpage"  

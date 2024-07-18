@@ -6,9 +6,10 @@ import {
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Paginationss = ({ onPageChange }) => {
+const Paginationss = ({ onPageChange,totalpage_count }) => {
+ 
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 142; // total pages you want to show
+  const totalPages = totalpage_count; // total pages you want to show
   const maxVisiblePages = 3; // maximum visible page buttons
 
   // Function to get the range of visible pages

@@ -75,7 +75,9 @@ const Randompost = (item) => {
                 <Image
                   className="h-56"
                   style={{width: 'auto', resizeMode: 'cover'}}
-                  source={{uri: `${item.featured_image}`}}
+                  source={{   uri: item.featured_image_url
+                    ? item.featured_image_url
+                    : ' https://affinitymag.co.uk/wp-content/uploads/2020/03/MAIN-IMAGE-3.jpg',}}
                 />
               </TouchableOpacity>
               <Text
@@ -93,7 +95,7 @@ const Randompost = (item) => {
                   fontFamily: 'OpenSans_Condensed-SemiBoldltalic',
                 }}
                 className="mt-2 text-xl">
-                {item.created_date}
+                {item.date}
               </Text>
             </View>
           );

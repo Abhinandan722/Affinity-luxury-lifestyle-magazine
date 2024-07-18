@@ -48,39 +48,61 @@ const PreviewsDetial = ({route}) => {
     scrollToTop();
     loadmore();
   }, [item.id]);
-  console.log(
-    'check data is come via rauter in detialpage pf prev  =',
-    item.id,
-  );
+  
 
   const loadmore = async () => {
     setLoader(true);
     try {
       const result = await getData(`/custom/v1/content/post?id=${item.id}`);
-      setPreNew_items(result);
-      console.log('this is prevnew_item   in prev detial page ', result.author);
+      setPreNew_items(result.data);
+      // console.log('this is prevnew_item   in prev detial page ', result.data.author);
     } catch (error) {
       console.log('this is prevnew_item detial page  error ', error);
     } finally {
       setLoader(false);
     }
   };
-  // console.log("check",preNew_items)
   const fadeInDownRef = useRef(null);
   const source = {
-
-    html:preNew_items ? preNew_items.content : '', 
+    html: preNew_items ? preNew_items.content : '',
   };
 
   const tagsStyles = {
-    span: {
+    div:{
+  
       color: 'black',
-      
+
       fontSize: 21,
       lineHeight: hp(3.6),
       letterSpacing: 1,
       marginVertical: hp(2.5),
 
+      fontFamily: 'OpenSans_Condensed-SemiBoldltalic',
+      fontFamily: 'OpenSans-Regular',
+
+    
+  },
+    p: {
+      color: 'black',
+
+      fontSize: 21,
+      lineHeight: hp(3.6),
+      letterSpacing: 1,
+      marginVertical: hp(2.5),
+
+      fontFamily: 'OpenSans_Condensed-SemiBoldltalic',
+      fontFamily: 'OpenSans-Regular',
+    },
+  
+    span: {
+      color: 'black',
+
+      fontSize: 21,
+      lineHeight: hp(3.6),
+      letterSpacing: 1,
+      marginVertical: hp(2.5),
+
+      fontFamily: 'OpenSans_Condensed-SemiBoldltalic',
       fontFamily: 'OpenSans-Regular',
     },
     b: {
@@ -88,21 +110,20 @@ const PreviewsDetial = ({route}) => {
       color: 'rgb(199, 167, 112)',
     },
 
-  
-    a:{
-    
-      fontFamily: 'OpenSans-Regular',
-        fontSize: 21,
+    a: {
+      fontSize: 21,
       lineHeight: hp(3.6),
-        fontFamily: 'OpenSans_Condensed-SemiBoldltalic',
+      fontFamily: 'OpenSans_Condensed-SemiBoldltalic',
+      fontFamily: 'OpenSans-Regular',
     },
     img: {
       width: wp(90),
       height: 'auto',
       marginVertical: hp(1),
     },
+   
   };
- 
+
   const scrollToTop = () => {
     scrollViewRef.current.scrollTo({y: 0, animated: true, duration: 1000});
   };
@@ -114,22 +135,19 @@ const PreviewsDetial = ({route}) => {
   return (
     <ScrollView ref={scrollViewRef} contentContainerStyle={{flexGrow: 1}}>
       <Animated.View
-        style={{flex: 1, backgroundColor: 'white',}}
+        style={{flex: 1, backgroundColor: 'white'}}
         ref={fadeInDownRef}>
         <View style={{paddingHorizontal: wp(5), backgroundColor: 'white'}}>
-          {preNew_items && <Header category={preNew_items.categories} />}
+          <Header category={preNew_items ? preNew_items.categories : ' '} />
 
           <View style={{marginTop: hp(2)}}>
             <View>
               {Loader || preNew_items === null ? (
-                <View
-                  style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <ActivityIndicator size="large" color="rgb(199, 167, 112)" />
-                </View>
+                <ActivityIndicator
+                  style={{height: hp(70), alignSelf: 'auto'}}
+                  size={'large'}
+                  color="rgb(199, 167, 112)"
+                />
               ) : (
                 <View>
                   <Animated.View
@@ -142,8 +160,11 @@ const PreviewsDetial = ({route}) => {
                         style={{
                           width: wp(90),
                           height: hp(30),
+                          objectFit:'contain'
                         }}
-                        source={{uri: preNew_items.featured_image_url}}
+                        source={{   uri: item.featured_image_url
+                          ? item.featured_image_url
+                          : ' https://affinitymag.co.uk/wp-content/uploads/2020/03/MAIN-IMAGE-3.jpg',}}
                         // sharedTransitionTag={item.title}
                       />
                     </TouchableOpacity>
@@ -219,24 +240,24 @@ const PreviewsDetial = ({route}) => {
                     </Text>
                   </Animated.View>
 
-                  <Animated.View 
-                  style={{marginTop:hp(4)}}
+                  <Animated.View
+                    style={{marginTop: hp(4)}}
                     entering={FadeInDown.delay(200)
                       .duration(800)
                       .springify()
                       .damping(20)}>
                     {/* <HTMLView value={htmlContent} stylesheet={htmlContentStyles} /> */}
                     <RenderHTML
-    source={source}
-    contentWidth={width}
-    tagsStyles={tagsStyles}
- />
-                 <Mybuttons/>
+                      source={source}
+                      contentWidth={width}
+                      tagsStyles={tagsStyles}
+                    />
+                    <Mybuttons />
                   </Animated.View>
                 </View>
               )}
 
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 onPress={() => {
                   if (toggle == 0) {
                     setToggle('1');
@@ -277,42 +298,34 @@ const PreviewsDetial = ({route}) => {
                     source={require('../img/star(1).png')}
                   />
                 )}
-              </TouchableOpacity>
+              </TouchableOpacity> */}
 
               {Loader || preNew_items === null ? (
-                <View
+                <ActivityIndicator
                   style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <ActivityIndicator size="large" color="rgb(199, 167, 112)" />
-                </View>
+                    height: hp(30),
+                  }}
+                  size="large"
+                  color="rgb(199, 167, 112)"
+                />
               ) : (
                 <Prev_Newer item={preNew_items} />
               )}
 
-
               {/*  rendom  */}
               {Loader || preNew_items === null ? (
-                <View
+                <ActivityIndicator
                   style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <ActivityIndicator size="large" color="rgb(199, 167, 112)" />
-                </View>
+                    height: hp(50),
+                  }}
+                  size="large"
+                  color="rgb(199, 167, 112)"
+                />
               ) : (
                 <Randompost item={preNew_items} />
               )}
-      
-             
             </View>
           </View>
-
-       
-        
 
           <ConnectWithUs />
         </View>
@@ -325,9 +338,6 @@ const PreviewsDetial = ({route}) => {
 export default PreviewsDetial;
 
 const styles = StyleSheet.create({
-
-  
-
   // ---------------------main style ----------------------------------------
   mainTextView: {
     position: 'relative',

@@ -1,39 +1,39 @@
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {useNavigation} from '@react-navigation/native';
 import Imgcomp from '../imgcomp';
-import Animated, {FadeInDown,sharedTransitionTag } from 'react-native-reanimated';
+import Animated, {
+  FadeInDown,
+  sharedTransitionTag,
+} from 'react-native-reanimated';
 const Card = ({item, navigationn, iDnum}) => {
   const navigation = useNavigation();
- 
-  useEffect(()=>{
 
-  },[])
+  useEffect(() => {}, []);
+ 
 
   return (
     <>
-  
-     <TouchableOpacity
-       onPress={navigationn}
-     >
-     <Animated.Image
-    
-      style={{
-        width: wp(90),
-        height:hp(30),
-        alignSelf:'center'
-      }}
-      source={{uri:item.featured_image_url}}
-      sharedTransitionTag={item.title}  
-    />
-     </TouchableOpacity>
-      
-      
-   
+      <TouchableOpacity onPress={navigationn}>
+        <Animated.Image
+          style={{
+            width: wp(90),
+            height: hp(30),
+            alignSelf: 'center',
+            objectFit:'contain'
+          }}
+          source={{
+            uri: item.featured_image_url
+              ? item.featured_image_url
+              : ' https://affinitymag.co.uk/wp-content/uploads/2020/03/MAIN-IMAGE-3.jpg',
+          }}
+        />
+      </TouchableOpacity>
+
       <View
         style={{
           flexDirection: 'row',
@@ -63,7 +63,6 @@ const Card = ({item, navigationn, iDnum}) => {
               fontFamily: 'OpenSans_Condensed-Medium',
               marginHorizontal: wp(1.4),
             }}>
-            
             {item.categories}
           </Text>
           <View
@@ -77,7 +76,7 @@ const Card = ({item, navigationn, iDnum}) => {
       </View>
 
       <Text
-  onPress={navigationn}
+        onPress={navigationn}
         style={{
           alignItems: 'center',
           color: 'black',
@@ -85,7 +84,7 @@ const Card = ({item, navigationn, iDnum}) => {
           fontFamily: 'PlayfairDisplay-Medium',
           textAlign: 'center',
         }}>
-        {item.title}
+         {item.title}
       </Text>
 
       <Text
@@ -99,8 +98,8 @@ const Card = ({item, navigationn, iDnum}) => {
           fontFamily: 'OpenSans_Condensed-SemiBoldltalic',
           fontFamily: 'OpenSans-Regular',
         }}>
-         {`${item.excerpt}`} 
-      
+        {item.excerpt}
+
       </Text>
 
       <Text
@@ -116,9 +115,9 @@ const Card = ({item, navigationn, iDnum}) => {
             fontSize: 21,
             color: 'rgb(199, 167, 112)',
           }}>
-        {item.author}
-        </Text> /{item.date} 
-        
+          {item.author}
+        </Text>{' '}
+        /{item.date}
       </Text>
     </>
   );

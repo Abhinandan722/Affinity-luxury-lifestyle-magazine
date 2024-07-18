@@ -13,7 +13,13 @@ const api = axios.create({
 export const getData = async (endpoint) => {
   try {
     const response = await api.get(endpoint);
-    return response.data;
+    // console.log(response.headers)
+    return{
+      data: response.data,
+      headers: response.headers,
+    }
+   
+  
   } catch (error) {
     console.error('Error fetching data:', error);
     throw error;

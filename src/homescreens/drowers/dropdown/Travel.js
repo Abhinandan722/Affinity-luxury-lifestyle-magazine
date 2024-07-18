@@ -14,15 +14,15 @@ const Travel = ({Travels, setTravels}) => {
     {label: 'TRAVEL', value: 'TRAVEL'},
     {label: 'TRAVEL DESTINATIONS', value: 'TRAVEL DESTINATIONS'},
     {label: 'TRAVEL REVIEWS', value: 'TRAVEL REVIEWS'},
-    {
-      label: "'THE FELLOWS HOUSE – A CULTIVATED RETREAT'",
-      value: "'THE FELLOWS HOUSE – A CULTIVATED RETREAT'",
-    },
+    // {
+    //   label: "'THE FELLOWS HOUSE – A CULTIVATED RETREAT'",
+    //   value: "'THE FELLOWS HOUSE – A CULTIVATED RETREAT'",
+    // },
     {label: 'LATEST TRAVEL NEWS', value: 'LATEST TRAVEL NEWS'},
-    {
-      label: "'CELEBRATING A MONTH OF LOVE AT SHANGRI-LA THE SHARD, LONDON'",
-      value: "'CELEBRATING A MONTH OF LOVE AT SHANGRI-LA THE SHARD, LONDON'",
-    },
+    // {
+    //   label: "'CELEBRATING A MONTH OF LOVE AT SHANGRI-LA THE SHARD, LONDON'",
+    //   value: "'CELEBRATING A MONTH OF LOVE AT SHANGRI-LA THE SHARD, LONDON'",
+    // },
     {label: 'MINI BREAKS', value: 'MINI BREAKS'},
     {label: 'CRUISES', value: 'CRUISES'},
   ]);
@@ -64,26 +64,27 @@ const Travel = ({Travels, setTravels}) => {
 
 onSelectItem={item => {
   console.log('....onselected', item.value);
-  if (item.value == 'TRAVEL DESTINATIONS') {
-    navigation.navigate('TravelANDdestinations');
-  } else if (item.value == 'TRAVEL') {
-    navigation.navigate('Travel');
-  } else if (item.value == 'TRAVEL REVIEWS') {
-    navigation.navigate('TravelAndReviews');
-  } else if (item.value == "'THE FELLOWS HOUSE – A CULTIVATED RETREAT'") {
-    navigation.navigate('The_fellows_house');
-  } else if (item.value == 'LATEST TRAVEL NEWS') {
-    navigation.navigate('LatestTravelNews');
-  } else if (
-    item.value ==
-    "'CELEBRATING A MONTH OF LOVE AT SHANGRI-LA THE SHARD, LONDON'"
-  ) {
-    navigation.navigate('CelevratingMonth_Lndon');
-  } else if (item.value == 'MINI BREAKS') {
-    navigation.navigate('MiniBreaks');
-  } else if (item.value == 'CRUISES') {
-    navigation.navigate('cruises');
-  }
+  navigation.navigate('home',{categories:item.value})
+  // if (item.value == 'TRAVEL DESTINATIONS') {
+  //   navigation.navigate('TravelANDdestinations');
+  // } else if (item.value == 'TRAVEL') {
+  //   navigation.navigate('Travel');
+  // } else if (item.value == 'TRAVEL REVIEWS') {
+  //   navigation.navigate('TravelAndReviews');
+  // } else if (item.value == "'THE FELLOWS HOUSE – A CULTIVATED RETREAT'") {
+  //   navigation.navigate('The_fellows_house');
+  // } else if (item.value == 'LATEST TRAVEL NEWS') {
+  //   navigation.navigate('LatestTravelNews');
+  // } else if (
+  //   item.value ==
+  //   "'CELEBRATING A MONTH OF LOVE AT SHANGRI-LA THE SHARD, LONDON'"
+  // ) {
+  //   navigation.navigate('CelevratingMonth_Lndon');
+  // } else if (item.value == 'MINI BREAKS') {
+  //   navigation.navigate('MiniBreaks');
+  // } else if (item.value == 'CRUISES') {
+  //   navigation.navigate('cruises');
+  // }
   
  
 }}

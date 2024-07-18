@@ -9,7 +9,7 @@ const Inspiration = ({Travels, setTravels}) => {
   const [dropdownItems, setDropdownItems] = useState([
     { label: "INSPIRATION", value: "INSPIRATION" },
     { label: "LATEST NEWS", value: "LATEST NEWS" },
-    {label: "VALENTINE’S DAY GIFT IDEAS FOR 2022", value: "VALENTINE’S DAY GIFT IDEAS FOR 2022"}
+   // {label: "VALENTINE’S DAY GIFT IDEAS FOR 2022", value: "VALENTINE’S DAY GIFT IDEAS FOR 2022"}
   
   ]);
   const navigation=useNavigation();
@@ -41,7 +41,7 @@ const Inspiration = ({Travels, setTravels}) => {
       }}
       containerProps={{
         style: {
-          height: isDropdownOpen === true ? hp(26) : null,
+          height: isDropdownOpen === true ? hp(18) : null,
         },
       }}
       style={{

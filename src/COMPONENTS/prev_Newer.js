@@ -29,14 +29,15 @@ const Prev_Newer = (item) => {
   useEffect(() => {
     loadmore();
   }, [item.item.id]);
+  
  
 
   const loadmore = async () => {
     setLoader(true);
     try {
       const result = await getData(`/custom/v1/content/post?id=${item.item.id}`);
-      setPreNew_items(result);
-      console.log('this is prevnew_item', result.next_post.title);
+      setPreNew_items(result.data);
+      // console.log('this is prevnew_item', result.data.next_post.title);
      
     } catch (error) {
       console.log('this is prevnew_item error ', error);
@@ -66,14 +67,14 @@ const Prev_Newer = (item) => {
           color="rgb(199, 167, 112)"
         />
       ) : preNew_items ? (
-        <View className="flex-row justify-around mt-10">
+        <View className=" justify-around mt-10 gap-5">
           {/* this is a prev and next view  */} 
 
     {
      preNew_items.prev_post==null?null: 
           <TouchableOpacity
             onPress={() => navigation.navigate('prevdetial',{item: preNew_items.prev_post})}
-            style={{width: wp(35), maxHeight: prevHeight+48}}
+            style={{width: wp(90), maxHeight: prevHeight+48}}
             className="relative z-0 overflow-hidden ">
             <View
               className=" p-1 absolute z-10 left-1 top-1 mr-2 "
@@ -82,7 +83,7 @@ const Prev_Newer = (item) => {
                 {
                   backgroundColor: '#ffffff',
                   height: prevHeight+40, // Dynamic height
-                  width: '94%',
+                  width: '98%',
                   opacity: 0.9,
                 },
               ]}>
@@ -90,7 +91,7 @@ const Prev_Newer = (item) => {
                 <Icon name="arrow-long-left" size={15} color="black" />
                 <Text
                   style={{letterSpacing: 1}}
-                  className=" text-black font-semibold text-base ">
+                  className=" text-black font-semibold text-lg ">
                   PREVIOUS
                 </Text>
               </View>
@@ -116,18 +117,18 @@ const Prev_Newer = (item) => {
      preNew_items.next_post==null?null: 
           <TouchableOpacity
           onPress={() => navigation.navigate('prevdetial',{item: preNew_items.next_post})}
-            style={{width: wp(35), maxHeight: nextHeight+48}}
+            style={{width: wp(90), maxHeight: nextHeight+48}}
             className="relative z-0 overflow-hidden ">
             <View
               className=" p-1 absolute z-10 left-1 top-1 mr-2 opacity-90 "
               style={[
                 styles.absulte,
-                {backgroundColor: '#ffffff', height: nextHeight+40, width: '94%'}, // Dynamic height
+                {backgroundColor: '#ffffff', height: nextHeight+40, width: '98%'}, // Dynamic height
               ]}>
               <View className="flex-row items-center gap-3 justify-center">
                 <Text
                   style={{letterSpacing: 3}}
-                  className=" text-black font-semibold text-base">
+                  className=" text-black font-semibold text-lg">
                   NEWER
                 </Text>
                 <Icon name="arrow-long-right" size={15} color="black" />

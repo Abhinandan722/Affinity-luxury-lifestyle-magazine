@@ -7,37 +7,31 @@ import {
   FlatList,
   ActivityIndicator,
   useWindowDimensions,
-  Alert,
 } from 'react-native';
 import React, {useEffect, useState, useRef} from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {useNavigation} from '@react-navigation/native';
-import {Products} from '../products';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import CustomBTN from '../COMPONENTS/customBTN';
 import ConnectWithUs from '../COMPONENTS/connectWithUs';
 import BottomView from '../COMPONENTS/BottomView';
 import Card from '../COMPONENTS/Card/card';
-import axios, {all} from 'axios';
 import RenderHTML from 'react-native-render-html';
 import Header from '../COMPONENTS/headers/header';
 import {getData} from '../API/api';
-import Pagination from '@cherry-soft/react-native-basic-pagination';
 import Animated, {
   FadeInDown,
   useSharedValue,
   useAnimatedScrollHandler,
   useAnimatedRef,
 } from 'react-native-reanimated';
-
 import Mybuttons from '../COMPONENTS/buttons';
 import Paginationss from '../COMPONENTS/pagination/pagination';
 
-
 const Home = () => {
+  const route = useRoute();
   const drawer = createDrawerNavigator();
   const navigation = useNavigation();
   const scrollY = useSharedValue(0);
@@ -46,19 +40,30 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [allLoaded, setAllLoaded] = useState(false); // State to track if all items are loaded
   const [allitem, setAllitem] = useState([]);
-  const itemsPerPage = 18; // Define the number of items per page
+  const [totalepage_count, setTotalepage_count] = useState();
+  const itemsPerPage = 18;
+
+  const category = route.params?.categories;
+  // console.log('get this name category', category);
 
   useEffect(() => {
+   // setCurrentPage(1); // Reset to first page on category change
     loadMoreData(1);
-  }, []);
+  }, [category]);
   const loadMoreData = async page => {
     if (isLoading) return; // Prevent further calls if all data is loaded or already loading
     setIsLoading(true);
     console.log('num', page);
 
     try {
-      const result = await getData(`/custom/v1/content?page=${page}`); // Updated API call for pagination
-      setAllitem(result);
+      const result = 
+      await getData(`/custom/v1/content?${category ? `categories=${category}&page=${page}` : `page=${page}`
+        }`,
+      );
+      
+      setTotalepage_count(result.headers['x-wp-totalpages']);
+      setAllitem(result.data);
+
       scrollToTop();
     } catch (error) {
       console.error('Error in All data fetching in home screen:', error);
@@ -71,7 +76,6 @@ const Home = () => {
     console.log('page changer number come from paginations:', page);
     setCurrentPage(page);
     loadMoreData(page);
-   
   };
 
   const scrollHandler = useAnimatedScrollHandler({
@@ -85,10 +89,9 @@ const Home = () => {
   };
 
   const scrollToTop = () => {
-    scrollViewRef.current?.scrollTo({y: 0, animated: true,});
+    scrollViewRef.current?.scrollTo({y: 0, animated: true});
   };
-  
- 
+
   return (
     <Animated.ScrollView
       ref={scrollViewRef}
@@ -97,14 +100,28 @@ const Home = () => {
       contentContainerStyle={{flexGrow: 1}}>
       <View style={{flex: 1, backgroundColor: 'white'}}>
         <View style={{paddingHorizontal: wp(5), backgroundColor: 'white'}}>
-          <Header category={'Home'} />
+          <Header category={category ? category : 'Home'} />
           <View style={{marginTop: hp(2)}}>
-            {isLoading && currentPage === 1 ? (
+            {category && isLoading && currentPage === 1 ? (
               <ActivityIndicator
-                className="h-40"
+                style={{height: hp(50)}}
                 size="large"
                 color="rgb(199, 167, 112)"
               />
+            ) : allitem.length === 0 && !isLoading ? (
+              <View>
+                <Text
+                  className="text-6xl  my-10"
+                  style={{
+                    alignItems: 'center',
+                    color: 'black',
+                    lineHeight: hp(10),
+                    fontFamily: 'PlayfairDisplay-Medium',
+                    textAlign: 'center',
+                  }}>
+                  No Post Were Found!
+                </Text>
+              </View>
             ) : (
               <FlatList
                 scrollEnabled={false}
@@ -132,6 +149,7 @@ const Home = () => {
                 ListFooterComponent={
                   isLoading ? (
                     <ActivityIndicator
+                  
                       size="large"
                       color="rgb(199, 167, 112)"
                     />
@@ -140,13 +158,14 @@ const Home = () => {
               />
             )}
           </View>
-          {isLoading && currentPage === 1 ? null : (
-             <Paginationss  onPageChange={handlePageChange} />
-          
+          {allitem.length > 0 && !isLoading && (
+            <Paginationss
+              onPageChange={handlePageChange}
+              totalpage_count={totalepage_count}
+            />
           )}
 
           {/* -------------------------------------custom pagination */}
-         
 
           <Animated.View entering={FadeInDown.duration(800)}>
             <ConnectWithUs />
@@ -193,4 +212,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(199, 167, 112)',
   },
 });
-

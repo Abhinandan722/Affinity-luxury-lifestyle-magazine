@@ -14,7 +14,7 @@ const FashionandBeauty = ({FashionBeauty, setFashionBeauty}) => {
     {label: 'FASHION AND BEAUTY', value: 'FASHION AND BEAUTY'},
     {label: 'FASHION', value: 'FASHION'},
     {label: 'BEAUTY', value: 'BEAUTY'},
-    {label: 'HEAR', value: 'HEAR'},
+    {label: 'HAIR', value: 'HAIR'},
     {label: 'TREATMENTS', value: 'TREATMENTS'},
     {label: 'MEN’S GROOMING', value: 'MEN’S GROOMING'},
   ]);
@@ -57,29 +57,28 @@ const FashionandBeauty = ({FashionBeauty, setFashionBeauty}) => {
  
   // },[isDropdownOpen])
 
-  
-
   return (
     <View>
       <DropDownPicker
 
 onSelectItem={(item) => {
   console.log("fashion and beauty",item.value);
-  if(item.value=='FASHION')
-    {
-     navigation.navigate('fashion')
-    }
-    else if (item.value === 'FASHION AND BEAUTY') {
-     navigation.navigate('fashion&beauty');
-   } else if (item.value === 'BEAUTY') {
-     navigation.navigate('beauty');
-   } else if (item.value === 'HEAR') {
-     navigation.navigate('hear');
-   } else if (item.value === 'TREATMENTS') {
-     navigation.navigate('treatments');
-   } else if(item.value=='MEN’S GROOMING'){
-    navigation.navigate('MENSGROOMING')
-   }
+  navigation.navigate('home',{categories:item.value})
+  // if(item.value=='FASHION')
+  //   {
+  //    navigation.navigate('fashion')
+  //   }
+  //   else if (item.value === 'FASHION AND BEAUTY') {
+  //    navigation.navigate('home',{categories:item.value});
+  //  } else if (item.value === 'BEAUTY') {
+  //    navigation.navigate('beauty');
+  //  } else if (item.value === 'HEAR') {
+  //    navigation.navigate('hear');
+  //  } else if (item.value === 'TREATMENTS') {
+  //    navigation.navigate('treatments');
+  //  } else if(item.value=='MEN’S GROOMING'){
+  //   navigation.navigate('MENSGROOMING')
+  //  }
 
 }}
         dropDownContainerStyle={{
